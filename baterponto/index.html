@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Bater o Ponto</title>
+	<style>
+		body {
+			background-color: #f8f8f8;
+			font-family: Arial, sans-serif;
+		}
+		h1 {
+			color: #333;
+			text-align: center;
+			margin-top: 50px;
+		}
+		form {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			margin-top: 50px;
+		}
+		label {
+			font-size: 20px;
+			font-weight: bold;
+			margin-bottom: 20px;
+		}
+		select {
+			font-size: 16px;
+			padding: 10px;
+			border: none;
+			border-radius: 5px;
+			box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+			outline: none;
+			margin-bottom: 20px;
+		}
+		button {
+			background-color: #2ecc71;
+			color: #fff;
+			font-size: 20px;
+			font-weight: bold;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+			cursor: pointer;
+			transition: all 0.3s ease;
+		}
+		button:hover {
+			background-color: #27ae60;
+		}
+	</style>
+</head>
+<body>
+	<h1>Bater o Ponto</h1>
+	<form>
+		<label for="funcionarios">Selecione um funcionário:</label>
+		<select id="funcionarios" name="funcionarios">
+			<option value="joao">João</option>
+			<option value="maria">Maria</option>
+			<option value="pedro">Pedro</option>
+			<option value="ana">Ana</option>
+		</select>
+		<button id="baterPonto">Bater o Ponto</button>
+	</form>
+
+	<script>
+		// adicione o token do seu bot do Telegram criado no BotFather
+		const botToken = '5997701374:AAHXqWITznKvpVMEoKvWx79gc0cOzXmbSF4';
+		// adicione o ID do chat que você deseja enviar a mensagem
+		const chatId = '-801734926';
+
+		// adiciona um evento de clique ao botão
+		document.getElementById("baterPonto").addEventListener("click", function() {
+			// seleciona o funcionário escolhido
+			var funcionarioSelecionado = document.getElementById("funcionarios").value;
+			// define a hora atual
+			var horaAtual = new Date();
+			// define a mensagem a ser enviada para o Telegram
+			var mensagem = "Ponto batido por " + funcionarioSelecionado + " às " + horaAtual.toLocaleTimeString();
+			// envia a mensagem para o Telegram
+			fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${mensagem}`);
+		});
+	</script>
+</body>
+</html>
